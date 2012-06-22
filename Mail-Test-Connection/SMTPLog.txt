@@ -1,0 +1,80 @@
+DEBUG: setDebug: JavaMail version 1.4.4
+DEBUG: getProvider() returning javax.mail.Provider[TRANSPORT,smtp,com.sun.mail.smtp.SMTPTransport,Sun Microsystems, Inc]
+DEBUG SMTP: useEhlo true, useAuth true
+DEBUG SMTP: trying to connect to host "pod51019.outlook.com", port 587, isSSL false
+220 pod51019.outlook.com Microsoft ESMTP MAIL Service ready at Mon, 26 Sep 2011 11:55:53 +0000
+DEBUG SMTP: connected to host "pod51019.outlook.com", port: 587
+
+EHLO FinA-Nika
+250-pod51019.outlook.com Hello [213.131.60.234]
+250-SIZE 36700160
+250-PIPELINING
+250-DSN
+250-ENHANCEDSTATUSCODES
+250-STARTTLS
+250-AUTH
+250-8BITMIME
+250-BINARYMIME
+250 CHUNKING
+DEBUG SMTP: Found extension "SIZE", arg "36700160"
+DEBUG SMTP: Found extension "PIPELINING", arg ""
+DEBUG SMTP: Found extension "DSN", arg ""
+DEBUG SMTP: Found extension "ENHANCEDSTATUSCODES", arg ""
+DEBUG SMTP: Found extension "STARTTLS", arg ""
+DEBUG SMTP: Found extension "AUTH", arg ""
+DEBUG SMTP: Found extension "8BITMIME", arg ""
+DEBUG SMTP: Found extension "BINARYMIME", arg ""
+DEBUG SMTP: Found extension "CHUNKING", arg ""
+STARTTLS
+220 2.0.0 SMTP server ready
+EHLO FinA-Nika
+250-pod51019.outlook.com Hello [213.131.60.234]
+250-SIZE 36700160
+250-PIPELINING
+250-DSN
+250-ENHANCEDSTATUSCODES
+250-AUTH LOGIN
+250-8BITMIME
+250-BINARYMIME
+250 CHUNKING
+DEBUG SMTP: Found extension "SIZE", arg "36700160"
+DEBUG SMTP: Found extension "PIPELINING", arg ""
+DEBUG SMTP: Found extension "DSN", arg ""
+DEBUG SMTP: Found extension "ENHANCEDSTATUSCODES", arg ""
+DEBUG SMTP: Found extension "AUTH", arg "LOGIN"
+DEBUG SMTP: Found extension "8BITMIME", arg ""
+DEBUG SMTP: Found extension "BINARYMIME", arg ""
+DEBUG SMTP: Found extension "CHUNKING", arg ""
+DEBUG SMTP: Attempt to authenticate
+DEBUG SMTP: check mechanisms: LOGIN PLAIN DIGEST-MD5 NTLM 
+AUTH LOGIN
+334 VXNlcm5hbWU6
+bmlja0BuaWNramF2YW1haWwub25taWNyb3NvZnQuY29t
+334 UGFzc3dvcmQ6
+TWFnYXJpUGFyb2xpMQ==
+235 2.7.0 Authentication successful
+SMTP Connect successful
+DEBUG SMTP: use8bit false
+MAIL FROM:<nick@nickjavamail.onmicrosoft.com>
+250 2.1.0 Sender OK
+RCPT TO:<mindia@fina2.net>
+250 2.1.5 Recipient OK
+DEBUG SMTP: Verified Addresses
+DEBUG SMTP:   mindia@fina2.net
+DATA
+354 Start mail input; end with <CRLF>.<CRLF>
+From: nick@nickjavamail.onmicrosoft.com
+To: mindia@fina2.net
+Message-ID: <14823211.1.1317038010225.JavaMail."nick@nickjavamail.onmicrosoft.com"@FinA-Nika>
+Subject: Testing Subject
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+
+Dear Mail Crawler,
+
+ No spam to my email, please!
+.
+250 2.6.0 <14823211.1.1317038010225.JavaMail."nick@nickjavamail.onmicrosoft.com"@FinA-Nika> [InternalId=469971] Queued mail for delivery
+QUIT
+221 2.0.0 Service closing transmission channel
