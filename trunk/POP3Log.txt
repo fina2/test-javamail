@@ -1,0 +1,32 @@
+DEBUG: setDebug: JavaMail version 1.4.4
+DEBUG: getProvider() returning javax.mail.Provider[STORE,pop3,com.sun.mail.pop3.POP3Store,Sun Microsy stems, Inc]
+DEBUG POP3: mail.pop3.rsetbeforequit: false
+DEBUG POP3: mail.pop3.disabletop: false
+DEBUG POP3: mail.pop3.forgettopheaders: false
+DEBUG POP3: mail.pop3.cachewriteto: false
+DEBUG POP3: mail.pop3.filecache.enable: false
+DEBUG POP3: mail.pop3.keepmessagecontent: false
+DEBUG POP3: mail.pop3.starttls.enable: false
+DEBUG POP3: mail.pop3.starttls.required: false
+DEBUG POP3: mail.pop3.apop.enable: false
+DEBUG POP3: mail.pop3.disablecapa: false
+DEBUG POP3: connecting to host "pop.gmail.com", port 995, isSSL true
+S: +OK Gpop ready for requests from 85.117.32.235 a3pf26874505wie.15
+C: CAPA
+S: +OK Capability list follows
+USER
+RESP-CODES
+EXPIRE 0
+LOGIN-DELAY 300
+TOP
+UIDL
+X-GOOGLE-VERHOEVEN
+X-GOOGLE-RICO
+.
+C: USER javamail12@gmail.com
+S: +OK send PASS
+C: PASS javamailjavamail
+S: +OK Welcome.
+C: STAT
+S: +OK 6 70086C: QUIT
+S: +OK Farewell.
