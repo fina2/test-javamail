@@ -35,7 +35,7 @@ import javax.swing.table.DefaultTableModel;
 public class MainPage extends JFrame {
 
     private static Properties properties = null;
-    
+   // int a;
     private Container container;
     private JTabbedPane tabs;
     private JPanel pop3Panel;
