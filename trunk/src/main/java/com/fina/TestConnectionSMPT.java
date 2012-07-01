@@ -53,7 +53,7 @@ public class TestConnectionSMPT {
 		message.setSubject("Testing Subject");
 		Calendar c = Calendar.getInstance();
      String header = "This message was sent by \"Test Java Mail Connection\"\non " + c.getTime() + "\n";
-		message.setContent(header + "test + \u041A\u043E\u0434\u043E\u043E \u043E\u0440\u0443\u0443\u043B\u043D\u0430 \u0443\u0443", "text/plain; charset=UTF-8");
+		message.setContent(header /*+ "test + \u041A\u043E\u0434\u043E\u043E \u043E\u0440\u0443\u0443\u043B\u043D\u0430 \u0443\u0443"*/, "text/plain; charset=UTF-8");
 
 		InternetAddress[] addresses = new InternetAddress[to.length];
 		for (int i = 0; i < addresses.length; i++) {
