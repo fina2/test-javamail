@@ -1,4 +1,5 @@
-  JavaMail(TM) API 1.4.5 release
+<p> 
+ JavaMail(TM) API 1.4.5 release
 
   CHANGES IN THE 1.4.5 RELEASE
           ----------------------------
@@ -22,4 +23,5 @@ K  4753    wrong message accessed when another client expunges and adds messages
 <no id>    work around Gmail IMAP bug with nested messages
 <no id>    close the SMTP connection if there's an I/O error
 
+</p>
 link: http://www.oracle.com/technetwork/java/javamail145changes-1562616.html
