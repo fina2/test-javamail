@@ -24,6 +24,7 @@ public class TestConnectionSMPT {
 		final String host = properties.getProperty("mail.smtp.host");
 		final String user = properties.getProperty("mail.user");
 		final String password = properties.getProperty("mail.password");
+		final String address = properties.getProperty("mail.address");
 
 		properties.put("mail.smtp.auth", "true");
 		properties.put("mail.smtp.ssl.enable", "false");
@@ -32,8 +33,7 @@ public class TestConnectionSMPT {
 		properties.put("mail.smtp.port", properties.getProperty("mail.smtp.port"));
 		properties.put("mail.smtp.socketFactory.port", properties.getProperty("mail.smtp.port"));
 		if (properties.getProperty("mail.smtp.ssl.enable").equals("true")) {
-			properties.put("mail.smtp.socketFactory.class",
-					"javax.net.ssl.SSLSocketFactory");
+			properties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 			properties.put("mail.smtp.socketFactory.fallback", "false");
 		}
 
@@ -47,13 +47,15 @@ public class TestConnectionSMPT {
 		session.getDebugOut().println("SMTP Connect successful");
 
 		Message message = new MimeMessage(session);
-		message.setFrom(new InternetAddress(user));
-		message.setRecipients(Message.RecipientType.TO,
-				InternetAddress.parse(to[0]));
+		message.setFrom(new InternetAddress(address));
+		message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to[0]));
 		message.setSubject("Testing Subject");
 		Calendar c = Calendar.getInstance();
-     String header = "This message was sent by \"Test Java Mail Connection\"\non " + c.getTime() + "\n";
-		message.setContent(header /*+ "test + \u041A\u043E\u0434\u043E\u043E \u043E\u0440\u0443\u0443\u043B\u043D\u0430 \u0443\u0443"*/, "text/plain; charset=UTF-8");
+		String header = "This message was sent by \"Test Java Mail Connection\"\non " + c.getTime() + "\n";
+		message.setContent(header /*
+								 * +
+								 * "test + \u041A\u043E\u0434\u043E\u043E \u043E\u0440\u0443\u0443\u043B\u043D\u0430 \u0443\u0443"
+								 */, "text/plain; charset=UTF-8");
 
 		InternetAddress[] addresses = new InternetAddress[to.length];
 		for (int i = 0; i < addresses.length; i++) {
