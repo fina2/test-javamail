@@ -72,7 +72,7 @@ public class TestConnectionIMAP {
 	public static Properties createProperties(String fileName) {
 		Properties prop = new Properties();
 		try {
-			prop.load(new FileReader("mail.properties"));
+			prop.load(new FileReader(fileName));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

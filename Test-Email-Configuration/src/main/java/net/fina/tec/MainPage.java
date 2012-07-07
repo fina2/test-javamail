@@ -401,7 +401,7 @@ public class MainPage extends JFrame {
 							this.parent.setEnabled(false);
 							MainPage.this.sendTextArea.setText("");
 							String to = MainPage.this.sendTo.getText();
-							TestConnectionSMPT.sendMail(new String[] { to });
+							TestConnectionSMPT.sendMail(fileName,new String[] { to });
 							MainPage.this.sendTextArea
 									.setText("Send successfully.\nSend To : "
 											+ to);
@@ -555,7 +555,7 @@ public class MainPage extends JFrame {
 
 		for (int i = 0; i < arr.length; i++) {
 			String p = (String) arr[i];
-			Vector v = new Vector();
+			Vector<String> v = new Vector<String>();
 
 			for (String string : general) {
 				if (p.contains(string)) {
