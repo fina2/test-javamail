@@ -21,8 +21,6 @@ public class TestConnectionIMAP {
 	private static String folderName = "INBOX";
 
 	public static void main(String[] args) {
-		args = new String[1];
-		args[0] = "C:\\Users\\misha\\Desktop\\Mail-Test-Connection\\mail.properties";
 		try {
 			System.out.println("Start");
 
