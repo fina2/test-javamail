@@ -17,8 +17,7 @@ public class TestConnectionSMPT {
 	public static void main(String[] args) throws Exception {
 
 		if (args.length != 1) {
-			throw new RuntimeException(
-					"Plase Set Parameter Properties Folde Name");
+			throw new RuntimeException("Plase Set Parameter Properties Folde Name");
 		}
 
 		TestConnectionSMPT.sendMail(args[0], "gochiashvili@fina2.net");
@@ -36,14 +35,15 @@ public class TestConnectionSMPT {
 		properties.put("mail.smtp.ssl.enable", "false");
 		properties.put("mail.smtp.starttls.enable", "true");
 
-		properties.put("mail.smtp.port",
-				properties.getProperty("mail.smtp.port"));
-		properties.put("mail.smtp.socketFactory.port",
-				properties.getProperty("mail.smtp.port"));
+		properties.put("mail.smtp.port", properties.getProperty("mail.smtp.port"));
+
 		if (properties.getProperty("mail.smtp.ssl.enable").equals("true")) {
-			properties.put("mail.smtp.socketFactory.class",
-					"javax.net.ssl.SSLSocketFactory");
+			properties.put("mail.smtp.socketFactory.port", properties.getProperty("mail.smtp.port"));
 			properties.put("mail.smtp.socketFactory.fallback", "false");
+			properties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+		} else {
+			properties.put("mail.smtp.ssl.trust", host);
+			properties.setProperty("mail.smtp.auth.plain.disable", "true");
 		}
 
 		Session session = Session.getDefaultInstance(properties);
@@ -57,16 +57,11 @@ public class TestConnectionSMPT {
 
 		Message message = new MimeMessage(session);
 		message.setFrom(new InternetAddress(address));
-		message.setRecipients(Message.RecipientType.TO,
-				InternetAddress.parse(to[0]));
+		message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to[0]));
 		message.setSubject("Testing Subject");
 		Calendar c = Calendar.getInstance();
-		String header = "This message was sent by \"Test Java Mail Connection\"\non "
-				+ c.getTime() + "\n";
-		message.setContent(header /*
-								 * +
-								 * "test + \u041A\u043E\u0434\u043E\u043E \u043E\u0440\u0443\u0443\u043B\u043D\u0430 \u0443\u0443"
-								 */, "text/plain; charset=UTF-8");
+		String header = "This message was sent by \"Test Java Mail Connection\"\non " + c.getTime() + "\n";
+		message.setContent(header, "text/plain; charset=UTF-8");
 
 		InternetAddress[] addresses = new InternetAddress[to.length];
 		for (int i = 0; i < addresses.length; i++) {
