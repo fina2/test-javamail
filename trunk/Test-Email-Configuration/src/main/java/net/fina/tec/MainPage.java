@@ -33,6 +33,8 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableModel;
 
+import org.apache.log4j.Logger;
+
 @SuppressWarnings("serial")
 public class MainPage extends JFrame {
 
@@ -127,23 +129,15 @@ public class MainPage extends JFrame {
 						parent.setEnabled(false);
 
 						try {
-							int messageCount = TestConnectionPOP3
-									.readMails(fileName);
-							pop3TextArea.setText(pop3TextArea.getText() + "\n"
-									+ "Connected successfully.\n");
-							pop3TextArea.setText(pop3TextArea.getText() + "\n"
-									+ "Start mail Read.\n");
-							pop3TextArea.setText(pop3TextArea.getText() + "\n"
-									+ "Message(s) Count = " + messageCount
-									+ "\n");
-							pop3TextArea.setText(pop3TextArea.getText()
-									+ "\nPOP3 Read Test is OK");
-							pop3TextArea.setText(pop3TextArea.getText()
-									+ "\n-----------------------------------------------------------------------------------");
+							int messageCount = TestConnectionPOP3.readMails(fileName);
+							pop3TextArea.setText(pop3TextArea.getText() + "\n" + "Connected successfully.\n");
+							pop3TextArea.setText(pop3TextArea.getText() + "\n" + "Start mail Read.\n");
+							pop3TextArea.setText(pop3TextArea.getText() + "\n" + "Message(s) Count = " + messageCount + "\n");
+							pop3TextArea.setText(pop3TextArea.getText() + "\nPOP3 Read Test is OK");
+							pop3TextArea.setText(pop3TextArea.getText() + "\n-----------------------------------------------------------------------------------");
 						} catch (Exception e1) {
 							e1.printStackTrace();
-							pop3TextArea.setText(pop3TextArea.getText() + "\n"
-									+ e1.getMessage());
+							pop3TextArea.setText(pop3TextArea.getText() + "\n" + e1.getMessage());
 						} finally {
 							this.parent.setText(this.parentText);
 							this.parent.setEnabled(true);
@@ -169,8 +163,7 @@ public class MainPage extends JFrame {
 
 		final JTable pop3Table = new JTable(getCurrentRows("pop3"), col);
 		pop3Table.setModel(new PropertiesTableModel());
-		DefaultTableModel pop3DefaultTableModel = (DefaultTableModel) pop3Table
-				.getModel();
+		DefaultTableModel pop3DefaultTableModel = (DefaultTableModel) pop3Table.getModel();
 
 		for (Vector<String> v : getCurrentRows("pop3")) {
 			pop3DefaultTableModel.addRow(v);
@@ -256,40 +249,20 @@ public class MainPage extends JFrame {
 							this.parent.setText("Please wait...");
 							MainPage.this.imapTextArea.setText("");
 							this.parent.setEnabled(false);
-							int messagesCount = TestConnectionIMAP
-									.readMails(MainPage.this.fileName);
+							int messagesCount = TestConnectionIMAP.readMails(MainPage.this.fileName);
 
-							MainPage.this.imapTextArea
-									.setText(MainPage.this.imapTextArea
-											.getText()
-											+ "\nConnected successfully.\n");
+							MainPage.this.imapTextArea.setText(MainPage.this.imapTextArea.getText() + "\nConnected successfully.\n");
 
-							MainPage.this.imapTextArea
-									.setText(MainPage.this.imapTextArea
-											.getText()
-											+ "\n"
-											+ "Start mail Read.\n");
+							MainPage.this.imapTextArea.setText(MainPage.this.imapTextArea.getText() + "\n" + "Start mail Read.\n");
 
-							MainPage.this.imapTextArea
-									.setText(MainPage.this.imapTextArea
-											.getText()
-											+ "\n"
-											+ "Message(s) Count = "
-											+ messagesCount + "\n");
+							MainPage.this.imapTextArea.setText(MainPage.this.imapTextArea.getText() + "\n" + "Message(s) Count = " + messagesCount + "\n");
 
-							MainPage.this.imapTextArea
-									.setText(MainPage.this.imapTextArea
-											.getText()
-											+ "\nIMAP Read Test is OK!");
+							MainPage.this.imapTextArea.setText(MainPage.this.imapTextArea.getText() + "\nIMAP Read Test is OK!");
 
-							MainPage.this.imapTextArea.setText(MainPage.this.imapTextArea
-									.getText()
-									+ "\n-----------------------------------------------------------------------------------");
+							MainPage.this.imapTextArea.setText(MainPage.this.imapTextArea.getText() + "\n-----------------------------------------------------------------------------------");
 						} catch (Exception e1) {
 							e1.printStackTrace();
-							MainPage.this.imapTextArea
-									.setText(MainPage.this.imapTextArea
-											.getText() + "\n" + e1.getMessage());
+							MainPage.this.imapTextArea.setText(MainPage.this.imapTextArea.getText() + "\n" + e1.getMessage());
 						} finally {
 							this.parent.setText(this.parentText);
 							this.parent.setEnabled(true);
@@ -401,24 +374,14 @@ public class MainPage extends JFrame {
 							this.parent.setEnabled(false);
 							MainPage.this.sendTextArea.setText("");
 							String to = MainPage.this.sendTo.getText();
-							TestConnectionSMPT.sendMail(fileName,new String[] { to });
-							MainPage.this.sendTextArea
-									.setText("Send successfully.\nSend To : "
-											+ to);
+							TestConnectionSMPT.sendMail(fileName, new String[] { to });
+							MainPage.this.sendTextArea.setText("Send successfully.\nSend To : " + to);
 
-							MainPage.this.sendTextArea
-									.setText(MainPage.this.sendTextArea
-											.getText()
-											+ "\n"
-											+ "Send test is OK!");
+							MainPage.this.sendTextArea.setText(MainPage.this.sendTextArea.getText() + "\n" + "Send test is OK!");
 
-							MainPage.this.sendTextArea.setText(MainPage.this.sendTextArea
-									.getText()
-									+ "\n-----------------------------------------------------------------------------------");
+							MainPage.this.sendTextArea.setText(MainPage.this.sendTextArea.getText() + "\n-----------------------------------------------------------------------------------");
 						} catch (Exception e1) {
-							MainPage.this.sendTextArea
-									.setText(MainPage.this.sendTextArea
-											.getText() + "\n" + e1.getMessage());
+							MainPage.this.sendTextArea.setText(MainPage.this.sendTextArea.getText() + "\n" + e1.getMessage());
 
 							e1.printStackTrace();
 						} finally {
@@ -608,22 +571,25 @@ public class MainPage extends JFrame {
 
 	public static void main(String[] args) throws FileNotFoundException {
 		if (args.length != 1) {
-			throw new RuntimeException(
-					"Please Set Parameter Properties Folde Name");
+			throw new RuntimeException("Please Set Parameter Properties Folde Name");
 		}
+
+		Logger log = Logger.getLogger(MainPage.class);
+		log.info("Start Application");
 
 		final String folderName = args[0];
 		try {
 			properties = new Properties();
 			properties.load(new FileReader(folderName));
 		} catch (IOException ioex) {
+			log.error(ioex.getMessage(), ioex);
 			ioex.printStackTrace();
 		}
 		try {
-			javax.swing.UIManager
-					.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+			javax.swing.UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
 		} catch (Exception e) {
 			e.printStackTrace();
+			log.error(e.getMessage(), e);
 		}
 		Runnable run = new Runnable() {
 
@@ -637,15 +603,13 @@ public class MainPage extends JFrame {
 	private void addPropertyAttribure() {
 		KeyValueDialog keyValue = new KeyValueDialog();
 
-		int choice = JOptionPane.showConfirmDialog(this, keyValue,
-				"enter properties", 2);
+		int choice = JOptionPane.showConfirmDialog(this, keyValue, "enter properties", 2);
 
 		if (choice != 0) {
 			return;
 		}
 		String[] KV = keyValue.getKeyValue();
-		if ((KV[0] == null) || (KV[0].trim().length() == 0) || (KV[1] == null)
-				|| (KV[1].trim().length() == 0)) {
+		if ((KV[0] == null) || (KV[0].trim().length() == 0) || (KV[1] == null) || (KV[1].trim().length() == 0)) {
 			return;
 		}
 
@@ -661,13 +625,11 @@ public class MainPage extends JFrame {
 	}
 
 	private void DeleteTableRow(JTable table) {
-		if (JOptionPane.showConfirmDialog(table,
-				"Are you shure to delete the selected row?", "delete row", 2) != 0) {
+		if (JOptionPane.showConfirmDialog(table, "Are you shure to delete the selected row?", "delete row", 2) != 0) {
 			return;
 		}
 
-		if ((table.getSelectedRowCount() == 0)
-				&& (table.getSelectedColumnCount() == 0)) {
+		if ((table.getSelectedRowCount() == 0) && (table.getSelectedColumnCount() == 0)) {
 			return;
 		}
 		int[] rows = table.getSelectedRows();
