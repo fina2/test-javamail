@@ -25,8 +25,7 @@ public class TestConnectionPOP3 {
 			System.out.println("Start");
 
 			if (args.length != 1) {
-				throw new RuntimeException(
-						"Plase Set Parameter Properties Folde Name");
+				throw new RuntimeException("Plase Set Parameter Properties Folde Name");
 			}
 
 			final String fileName = args[0];
@@ -44,9 +43,7 @@ public class TestConnectionPOP3 {
 
 			store = session.getStore("pop3");
 
-			store.connect(host,
-					Integer.parseInt(prop.getProperty("mail.pop3.port")),
-					userName, pass);
+			store.connect(host, Integer.parseInt(prop.getProperty("mail.pop3.port")), userName, pass);
 
 			Folder folder = openInboxFolder(store);
 
@@ -81,8 +78,7 @@ public class TestConnectionPOP3 {
 		return prop;
 	}
 
-	private static Folder openInboxFolder(Store store)
-			throws MessagingException {
+	private static Folder openInboxFolder(Store store) throws MessagingException {
 		Folder folder = store.getFolder(folderName);
 		if (folder == null) {
 			throw new MessagingException("Invalid folder");
@@ -122,14 +118,12 @@ public class TestConnectionPOP3 {
 			Authenticator auth = new MailReaderAuthenticator(userName, pass);
 
 			session = Session.getInstance(prop, auth);
-			session.setDebugOut(new PrintStream("POP3Log.txt"));
+			session.setDebugOut(new PrintStream("logs" + System.getProperty("file.separator") + "POP3Log.txt"));
 			session.setDebug(true);
 
 			store = session.getStore("pop3");
 
-			store.connect(host,
-					Integer.parseInt(prop.getProperty("mail.pop3.port")),
-					userName, pass);
+			store.connect(host, Integer.parseInt(prop.getProperty("mail.pop3.port")), userName, pass);
 
 			Folder folder = openInboxFolder(store);
 
