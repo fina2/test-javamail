@@ -25,8 +25,7 @@ public class TestConnectionIMAP {
 			System.out.println("Start");
 
 			if (args.length != 1) {
-				throw new RuntimeException(
-						"Plase Set Parameter Properties Folde Name");
+				throw new RuntimeException("Plase Set Parameter Properties Folde Name");
 			}
 
 			final String fileName = args[0];
@@ -42,11 +41,11 @@ public class TestConnectionIMAP {
 			session = Session.getInstance(prop, auth);
 			session.setDebug(true);
 
+			session.setDebugOut(new PrintStream("logs" + System.getProperty("file.separator") + "IMAPLog.txt"));
+
 			store = session.getStore("imap");
 
-			store.connect(host,
-					Integer.parseInt(prop.getProperty("mail.imap.port")),
-					userName, pass);
+			store.connect(host, Integer.parseInt(prop.getProperty("mail.imap.port")), userName, pass);
 
 			Folder folder = openInboxFolder(store);
 
@@ -81,8 +80,7 @@ public class TestConnectionIMAP {
 		return prop;
 	}
 
-	private static Folder openInboxFolder(Store store)
-			throws MessagingException {
+	private static Folder openInboxFolder(Store store) throws MessagingException {
 		Folder folder = store.getFolder(folderName);
 		if (folder == null) {
 			throw new MessagingException("Invalid folder");
@@ -122,14 +120,12 @@ public class TestConnectionIMAP {
 			Authenticator auth = new MailReaderAuthenticator(userName, pass);
 
 			session = Session.getInstance(prop, auth);
-			session.setDebugOut(new PrintStream("IMAPLog.txt"));
+			session.setDebugOut(new PrintStream("logs" + System.getProperty("file.separator") + "IMAPLog.txt"));
 			session.setDebug(true);
 
 			store = session.getStore("imap");
 
-			store.connect(host,
-					Integer.parseInt(prop.getProperty("mail.imap.port")),
-					userName, pass);
+			store.connect(host, Integer.parseInt(prop.getProperty("mail.imap.port")), userName, pass);
 
 			Folder folder = openInboxFolder(store);
 			messageCount = folder.getMessageCount();
