@@ -38,8 +38,6 @@ public class TestConnectionSMPT {
 		final String address = properties.getProperty("mail.address");
 
 		properties.put("mail.smtp.auth", "true");
-		// properties.put("mail.smtp.ssl.enable", "false");
-		// properties.put("mail.smtp.starttls.enable", "true");
 
 		properties.put("mail.smtp.port", properties.getProperty("mail.smtp.port"));
 
