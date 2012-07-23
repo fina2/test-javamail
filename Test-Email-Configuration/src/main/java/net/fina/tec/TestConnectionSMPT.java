@@ -38,8 +38,8 @@ public class TestConnectionSMPT {
 		final String address = properties.getProperty("mail.address");
 
 		properties.put("mail.smtp.auth", "true");
-		properties.put("mail.smtp.ssl.enable", "false");
-		properties.put("mail.smtp.starttls.enable", "true");
+		// properties.put("mail.smtp.ssl.enable", "false");
+		// properties.put("mail.smtp.starttls.enable", "true");
 
 		properties.put("mail.smtp.port", properties.getProperty("mail.smtp.port"));
 
@@ -52,8 +52,17 @@ public class TestConnectionSMPT {
 			properties.setProperty("mail.smtp.auth.plain.disable", "true");
 		}
 
+		if (properties.get("mail.smtp.starttls.enable").equals("false")) {
+
+			// Remove Other Properties
+			properties.remove("mail.smtp.socketFactory.port");
+			properties.remove("mail.smtp.socketFactory.fallback");
+			properties.remove("mail.smtp.socketFactory.class");
+
+		}
+
 		Session session = Session.getDefaultInstance(properties);
-		session.setDebugOut(new PrintStream("SMTPLog.txt"));
+		session.setDebugOut(new PrintStream("logs" + System.getProperty("file.separator") + "SMTPLog.txt"));
 		session.setDebug(true);
 
 		try {
